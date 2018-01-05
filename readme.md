@@ -1,6 +1,6 @@
 # n36
 --
-    import "github.com/gianebao/groxy_app/n36"
+    import "github.com/gianebao/n36"
 
 
 ## Usage

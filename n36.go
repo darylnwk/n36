@@ -29,6 +29,17 @@ func New(charset string) *N36 {
 	return n
 }
 
+// NewThreadSafe creates a new thread safe n36 numeric map
+func NewThreadSafe(charset string) *N36 {
+	rand.Seed(time.Now().UnixNano())
+	n := &N36{
+		charset:  charset,
+		seedRand: &rand.Rand{},
+	}
+
+	return n
+}
+
 // Iton converts a uint64 value to string
 func (n *N36) Iton(i uint64) string {
 

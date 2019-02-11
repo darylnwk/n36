@@ -8,9 +8,27 @@ import (
 	"testing"
 	"time"
 
-	"github.com/gianebao/groxy_app/n36"
+	"github.com/darylnwk/n36"
 	"github.com/stretchr/testify/assert"
 )
+
+func ExampleN36_ItonThreadSafe() {
+	n := n36.NewThreadSafe(n36.CharRange62)
+
+	fmt.Println(n.Iton(0))
+	fmt.Println(n.Iton(1))
+	fmt.Println(n.Iton(36))
+	fmt.Println(n.Iton(62))
+	fmt.Println(n.Iton(3))
+
+	fmt.Println(n.Iton(412312313232346))
+	// Output:
+	// 1
+	// A
+	// 10
+	// 3
+	// 1T4ZlBAlI
+}
 
 func ExampleN36_Iton() {
 	n := n36.New(n36.CharRange62)

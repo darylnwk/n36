@@ -1,6 +1,6 @@
 # n36
 --
-    import "github.com/gianebao/n36"
+    import "github.com/darylnwk/n36"
 
 
 ## Usage
@@ -27,6 +27,13 @@ N36 represents a numeric map
 func New(charset string) *N36
 ```
 New creates a new n36 numeric map
+
+#### func  NewThreadSafe
+
+```go
+func NewThreadSafe(charset string) *N36
+```
+NewThreadSafe creates a new thread safe n36 numeric map
 
 #### func (*N36) Iton
 

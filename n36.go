@@ -69,14 +69,15 @@ func (n *N36) Ntoi(s string) (uint64, error) {
 
 // Random creates an (l)-long random string based on the character set
 func (n *N36) Random(l int) string {
+	n.Lock()
+	defer n.Unlock()
+
 	max := len(n.charset)
 	runes := []rune(n.charset)
 
 	b := make([]rune, l)
 	for i := range b {
-		n.Lock()
 		b[i] = runes[n.seedRand.Intn(max)]
-		n.Unlock()
 	}
 
 	return string(b)

@@ -5,11 +5,13 @@ import (
 	"math"
 	"math/rand"
 	"strings"
+	"sync"
 	"time"
 )
 
 // N36 represents a numeric map
 type N36 struct {
+	sync.Mutex
 	charset  string
 	seedRand *rand.Rand
 }
@@ -29,20 +31,8 @@ func New(charset string) *N36 {
 	return n
 }
 
-// NewThreadSafe creates a new thread safe n36 numeric map
-func NewThreadSafe(charset string) *N36 {
-	rand.Seed(time.Now().UnixNano())
-	n := &N36{
-		charset:  charset,
-		seedRand: &rand.Rand{},
-	}
-
-	return n
-}
-
 // Iton converts a uint64 value to string
 func (n *N36) Iton(i uint64) string {
-
 	r := ""
 	l := uint64(len(n.charset))
 
@@ -84,7 +74,9 @@ func (n *N36) Random(l int) string {
 
 	b := make([]rune, l)
 	for i := range b {
+		n.Lock()
 		b[i] = runes[n.seedRand.Intn(max)]
+		n.Unlock()
 	}
 
 	return string(b)
